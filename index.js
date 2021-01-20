@@ -125,7 +125,7 @@ combinedArray.forEach(elements => {console.log("Combined array: " + elements)});
 console.log("IGEN-------------- Enligt boken!");
 combinedArray.forEach( element => console.log(`combined array: ${ element }`));
 
-//Arbeta med object sid 56-------------------------
+//Arbeta med object sid 56----------------------------
 let hat = {
   name: "Hat",
   price: 120
@@ -138,3 +138,25 @@ let boot = {
 
 let totalPrice3 = SumPrices6(hat.price, boot.price);
 console.log(`Totalt: ${ totalPrice3 } och typ: ${ typeof totalPrice3}`);
+
+let gloves = {
+  productname: "Gloves",
+  price: "40"
+}
+ gloves.name = gloves.productname;
+ delete gloves.productname;
+ gloves.price = 20;
+
+ let totprice = SumPrices6(hat.price, boot.price, gloves.price);
+ console.log("Totalt pris: " + totprice + " typeof: "+ typeof totprice);
+
+ //sid 58 Type Coercion with || ----------------------------
+
+let propertycheck = hat.price || 0;
+let objectAndPropertyCheck = (hat || {}).price || 0;
+console.log(`Checks: ${ propertycheck }, ${ objectAndPropertyCheck }`);
+
+let otherHat = { ...hat };
+console.log(`Spread: ${ otherHat.name} Price ${otherHat.price }`);
+
+//
