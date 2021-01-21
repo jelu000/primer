@@ -159,4 +159,61 @@ console.log(`Checks: ${ propertycheck }, ${ objectAndPropertyCheck }`);
 let otherHat = { ...hat };
 console.log(`Spread: ${ otherHat.name} Price ${otherHat.price }`);
 
-//
+// sid 60-------
+let additionalProperties = { ...hat, discounted: true };
+console.log(`Additional: ${JSON.stringify(additionalProperties)}`);
+
+let replaceProperties = {...hat, price: 10 };
+console.log(`Replaced: ${JSON.stringify(replaceProperties)}`);
+
+let { price, ...someProperties } = hat;
+console.log(`Selected: ${JSON.stringify(someProperties)}`);
+
+console.log("hat object: " + JSON.stringify(hat));
+console.log(hat);
+
+//sid 61 defining Objects with Getters and Setters. ADDING Keps and Shirt not in book
+
+let Keps = {
+  name: "keps",
+  _price: 100,
+  price_inkTax: 100*1.2,
+
+  set price(newPrice){
+    this._price = newPrice;
+    this.price_inkTax = this._price * 1.2;
+  },
+
+  get price() {
+    return this._price;
+  },
+
+  writeDetails: function(){
+    console.log(`Object: ${this.name} ${this.price} ${this.price_inkTax}`);
+  }
+}
+
+let Shirt = {
+  name: "shirt",
+  price: "104",
+
+  get priceIncTax(){
+    return Number(this.price) * 1.2;
+  }
+}
+
+console.log(`Keps: ${ Keps.price}  ${Keps.price_inkTax}`);
+Keps.price = 120;
+console.log("Nytt pris:");
+console.log(`Keps: ${ Keps.price}  ${Keps.price_inkTax}`);
+
+console.log(`Shirt: ${ Shirt.price}  ${Shirt.priceIncTax}`);
+Shirt.price = 124;
+console.log("Nytt pris:");
+console.log(`Keps: ${ Shirt.price}  ${ Math.round(Shirt.priceIncTax) }`);
+
+Keps.writeDetails();
+Keps.price = 200;
+Keps.writeDetails();
+
+// Sid Understanding the this key word----------------------------
