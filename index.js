@@ -217,3 +217,39 @@ Keps.price = 200;
 Keps.writeDetails();
 
 // Sid Understanding the this key word----------------------------
+console.log("Key word this--------------------------------");
+
+let Snowboard = {
+  name: "snowboard",
+  price: "1040",
+  price_inkTax: 1040 * 1.2,
+
+  get priceIncTax(){
+    return Number(this.price) * 1.2;
+  },
+
+
+
+
+  writeDetails: function(){
+    console.log(`Object: ${this.name} ${this.price} ${this.price_inkTax}`);
+  }
+
+}
+
+//ArrowFunctions använd inte som metoder till klasser eller objekt
+writeDetails2 = () => console.log(`Object: ${Snowboard.name} ${Snowboard.price} ${Snowboard.price_inkTax}`);
+
+writeDetails2();
+Snowboard.writeDetails();
+//this används för att hänvisa till objektet till funktionen eller metoden tillhör.
+//Funktioner tillhör det globala objektet window i webläsare och till Node i javascriptprogram som körs i Node
+//Metoder hänvisar till Objektet varifrån metoden är anropad i från.
+console.log("");
+console.log("this används för att hänvisa till objektet till funktionen eller metoden tillhör.");
+console.log("Funktioner tillhör det globala objektet window i webläsare och till Node i javascriptprogram som körs i Node");
+console.log("Metoder hänvisar till Objektet varifrån metoden är anropad i från.");
+console.log("");
+
+//Att kalla på en funktion eller metod utan paranteser är ett refferens anrop på funktion eller metod och används oftast vid omClick för att inte kör funktionen vid start.
+console.log("Att kalla på en funktion eller metod utan () paranteser är ett refferensanrop på funktion eller metod och används oftast vid omClick för att inte kör funktionen vid start.");
