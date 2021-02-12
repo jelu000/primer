@@ -253,3 +253,17 @@ console.log("");
 
 //Att kalla på en funktion eller metod utan paranteser är ett refferens anrop på funktion eller metod och används oftast vid omClick för att inte kör funktionen vid start.
 console.log("Att kalla på en funktion eller metod utan () paranteser är ett refferensanrop på funktion eller metod och används oftast vid omClick för att inte kör funktionen vid start.");
+
+/*Kapitel 4 från Sid 73 Object och arv i javscript---*/
+//sid 74
+
+let skoter = {
+  name: "SkiDoo",
+  pris: 10000,
+  prisMedMoms(){
+    return Number(this.pris) * 1.25;
+  }
+}
+
+console.log(`skoter: ${skoter.name}, pris: ${skoter.pris}:-`);
+console.log(`toString: ${skoter.toString()}`);
