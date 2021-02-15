@@ -256,9 +256,9 @@ console.log("Att kalla på en funktion eller metod utan () paranteser är ett re
 
 /*Kapitel 4 från Sid 73 Object och arv i javscript---*/
 //sid 74
-
+console.log("");
 let skoter = {
-  name: "SkiDoo",
+  name: "Skoter",
   pris: 10000,
   prisMedMoms(){
     return Number(this.pris) * 1.25;
@@ -267,3 +267,70 @@ let skoter = {
 
 console.log(`skoter: ${skoter.name}, pris: ${skoter.pris}:-`);
 console.log(`toString: ${skoter.toString()}`);
+
+console.log("------------------");
+let vattenskoter = {
+  name: "Vattenskoter",
+  pris: 30000,
+  prisMedMoms(){
+    return Number(this.pris) * 1.25;
+  }
+}
+
+let skoterprototyp = Object.getPrototypeOf(skoter);
+console.log("Skoter prototyp: " + skoterprototyp);
+
+let vattenskoterprototyp = Object.getPrototypeOf(vattenskoter);
+console.log("VattenSkoter prototyp: " + vattenskoterprototyp);
+//kollar om prototyperna är lika
+console.log("Kollar om prototyperna är lika!");
+console.log(`Common prototyp ${ skoterprototyp === vattenskoterprototyp}`);
+//kollar om objekten är lika
+console.log("Kolla om objekten är lika");
+console.log(`Kollar om objekten är lika ${ skoter === vattenskoter}`);
+
+//prövar att skriva ut skoterobjekt
+console.log(skoter.toString());
+console.log(vattenskoter.toString());
+
+//Omdefinerar toString() för skoterprototyp
+skoterprototyp.toString = function(){
+  return `toString: name: ${this.name}, Pris: ${this.pris}`;
+}
+console.log("Omdefinerar toString() för skoterprototyp och skriver samma skoter & vilket påverkar VattenSkoter object också! Se upp efetrsom de är samma prototyp!");
+console.log(skoter.toString());
+console.log(vattenskoter.toString());
+
+//Custom prototype
+console.log("Custom prototyp");
+
+let ProductProto = {
+  toString: function(){
+    return `toString: name= ${this.name}, Pris= ${this.pris}`;
+  }
+}
+
+Object.setPrototypeOf(skoter, ProductProto);
+Object.setPrototypeOf(vattenskoter, ProductProto);
+
+console.log(skoter.toString());
+console.log(vattenskoter.toString());
+
+//Använda Constructor funktions
+console.log("");
+console.log("Använda Constructor funktions");
+
+let Vinterprodukt = function(name, price) {
+  this.name = name;
+  this.price = price;
+}
+
+Vinterprodukt.prototype.toString = function() {
+  return `toString: Name: ${this.name}, price: ${this.price}`;
+}
+console.log("Constructor function invoked with the 'new' keyword ");
+let skidor = new Vinterprodukt("Skidor", 2495);
+let snowboard = new Vinterprodukt("Snowboard", 1795);
+
+console.log(skidor.toString());
+console.log(snowboard.toString());
