@@ -20,7 +20,7 @@ class TaxedProduct extends Product{
   }
 
   getPriceIncTax(){
-    return Number(this.price) * this.taxRate;
+    return Number(this.price) * this.taxrate;
   }
 
   toString(){
@@ -35,4 +35,6 @@ let pjaxor = new Product("Pjäxor", 1000);
 console.log(mossa.toString());
 console.log(pjaxor.toString());
 
-console.log( new Product("Pjäxor", 1000, 1.25) );
+let stighud = new TaxedProduct("Stighud", 1220);
+
+console.log( stighud.toString() );
