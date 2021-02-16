@@ -334,3 +334,49 @@ let snowboard = new Vinterprodukt("Snowboard", 1795);
 
 console.log(skidor.toString());
 console.log(snowboard.toString());
+
+//sid 80------
+let MomsadVinterProdukt = function(name, price, momssats){
+
+  console.log("");
+  console.log("Använder call() för att klämma in construktorn i arvskedjan");
+  //Använder call() för att klämma in construktorn i arvskedjan
+
+  Vinterprodukt.call(this, name, price);
+  this.momssats = momssats;
+}
+
+console.log("");
+console.log("Använder Object.setPrototypeOf() för att skicka in den nya constructorn i arvskedjan");
+//Använder Object.setPrototypeOf() för att skicka in den nya constructorn i arvskedjan
+Object.setPrototypeOf(MomsadVinterProdukt.prototype, Vinterprodukt.prototype);
+
+MomsadVinterProdukt.prototype.getPrisMedMoms = function(){
+  return (this.price) * this.momssats;
+}
+MomsadVinterProdukt.prototype.toMomsString = function(){
+  return `${this.toString()}, Momsad: ${this.getPrisMedMoms()}`
+}
+
+let pulka = new  MomsadVinterProdukt("Pulka", 100, 1.4);
+
+console.log(pulka.toMomsString());
+
+//Skuggar eller override, omdefinerar prototyp
+console.log("Skuggar eller override, omdefinerar prototyp");
+
+MomsadVinterProdukt.prototype.toString = function(){
+  let chainResult = Vinterprodukt.prototype.toString.call(this);
+  return `${chainResult}, Momsad: ${this.getPrisMedMoms()}`
+}
+
+console.log(`Pulka och MomsadVinterProdukt: ${pulka instanceof MomsadVinterProdukt}`);
+console.log(`Pulka och VinterProdukt: ${pulka instanceof Vinterprodukt}`);
+
+console.log(`skidor och MomsadVinterProdukt: ${skidor instanceof MomsadVinterProdukt}`);
+console.log(`skidor och VinterProdukt: ${skidor instanceof Vinterprodukt}`);
+
+Vinterprodukt.process = (...produkter) => produkter.forEach(p => console.log(p.toString()));
+Vinterprodukt.process(new Vinterprodukt("Snowracer", 450, 1.25), new Vinterprodukt("Stavar", 80, 1.25), new Vinterprodukt("Hjälm", 40, 1.25));
+console.log("Klar till sida 82, ska börja med klasser i ny fil");
+//klar till sida 82
