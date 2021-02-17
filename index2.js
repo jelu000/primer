@@ -109,8 +109,10 @@ console.log("Ännu ett sett att använda generator istället för iterator för 
 console.log("");
 console.log("Definera iterabla object Sid 89");
 
-class GiftPack{
-  construct(name, prod1, prod2, prod3){
+
+
+class Giftpack {
+  constructor(name, prod1, prod2, prod3){
     this.name = name;
     this.prod1 = prod1;
     this.prod2 = prod2;
@@ -118,7 +120,7 @@ class GiftPack{
   }
 
   getTotalPrice(){
-    return [this.prod1, this.prod2, this.prod3].reduce( (total, p) => total , 0);
+    return [this.prod1, this.prod2, this.prod3].reduce( (total, p) => total + p.price, 0);
   }
 
   *getGenerator(){
@@ -126,11 +128,42 @@ class GiftPack{
     yield this.prod2;
     yield this.prod3;
   }
+
+  *[Symbol.iterator]() {
+    yield this.prod1;
+    yield this.prod2;
+    yield this.prod3;
+  }
 }
 
-let winterp = new GiftPack("Winter", new Product("Mössa", 100), new Product("Handskar", 150), new Product("Buff", 50));
+
+let winterp = new Giftpack("Winter", new Product("Mössa", 100), new Product("Handskar", 150), new Product("Buff", 50));
+
 console.log("---------");
 console.log(`Totalt pris: ${ winterp.getTotalPrice() }`);
-console.log( JSON.stringify(new Product("Mössa", 100)) );
-
+console.log("--Med [...winterp.getGenerator()].forEach");
 [...winterp.getGenerator()].forEach(p => console.log(`Product: ${ p }`));
+console.log("--Och igen men *[Symbol.iterator].forEach");
+[...winterp].forEach(p => console.log(`Produkte igen: ${ p }`));
+
+//sid 92 use object called data to collect products
+console.log("");
+console.log("sid 92 use object called data to collect products");
+let data = { hat: new Product("Hat", 100) }
+data.boots = new Product("Boots", 200);
+
+Object.keys(data).forEach( i => console.log(data[i].toString()));
+
+//Använder Map istället för att slippa begränsning med endast string som key
+console.log("");
+console.log("Använder Map istället för att slippa begränsning med endast string som key");
+
+let datamap = new Map();
+datamap.set("jacka", new Product("jacka", 600));
+datamap.set("skjorta", new Product("skjorta", 400));
+
+[...datamap.keys()].forEach(key => console.log(datamap.get(key).toString()));
+
+//börjar med sid 94 Symbols
+console.log("");
+console.log("börjar med sid 94 Symbols");
