@@ -108,3 +108,29 @@ console.log("Ännu ett sett att använda generator istället för iterator för 
 
 console.log("");
 console.log("Definera iterabla object Sid 89");
+
+class GiftPack{
+  construct(name, prod1, prod2, prod3){
+    this.name = name;
+    this.prod1 = prod1;
+    this.prod2 = prod2;
+    this.prod3 = prod3;
+  }
+
+  getTotalPrice(){
+    return [this.prod1, this.prod2, this.prod3].reduce( (total, p) => total , 0);
+  }
+
+  *getGenerator(){
+    yield this.prod1;
+    yield this.prod2;
+    yield this.prod3;
+  }
+}
+
+let winterp = new GiftPack("Winter", new Product("Mössa", 100), new Product("Handskar", 150), new Product("Buff", 50));
+console.log("---------");
+console.log(`Totalt pris: ${ winterp.getTotalPrice() }`);
+console.log( JSON.stringify(new Product("Mössa", 100)) );
+
+[...winterp.getGenerator()].forEach(p => console.log(`Product: ${ p }`));
